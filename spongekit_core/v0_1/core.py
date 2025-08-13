@@ -35,8 +35,9 @@ def build_config(place="Amsterdam, Netherlands",
                  tile_km=1.5,
                  storm_mm=50.0,
                  preset: RoofPreset = EXTENSIVE,
-                 scenarios=(0.10, 0.20, 0.30),
-                 save_basemap=True):
+                 scenarios=(0.10, 0.20, 0.30, 0.40, 0.50),
+                 save_basemap=True,
+                 unit_cost=150.0):  # ← add this here
     bbox = square_bbox_around(place, tile_km)
     return {
         "place": place,
@@ -48,7 +49,8 @@ def build_config(place="Amsterdam, Netherlands",
         "R_mm": preset.R_mm,
         "scenarios": list(scenarios),
         "save_basemap": save_basemap,
-        "map_folder": "outputs/maps"
+        "map_folder": "outputs/maps",
+        "unit_cost_per_m2": unit_cost 
     }
 
 # --- Data fetching ---
@@ -111,6 +113,8 @@ def fetch_buildings(config):
 def simulate_scenarios(bldgs, config):
     total_area = bldgs["area_m2"].sum()
     records = []
+    base_runoff_m3 = estimate_runoff(config, total_area, green_area=0.0)
+
 
     for frac in config["scenarios"]:
         sel = select_green_roofs(bldgs, frac)
@@ -122,14 +126,23 @@ def simulate_scenarios(bldgs, config):
             "coverage_frac": frac,
             "green_area_m2": round(green_area, 1),
             "total_roof_m2": round(total_area, 1),
-            "runoff_m3": round(runoff_m3, 1)
-        })
+            "runoff_m3": round(runoff_m3, 1),
+            "reduction_%": round(100 * (base_runoff_m3 - runoff_m3) / base_runoff_m3, 1),
+            "cost_usd": round(green_area * config["unit_cost_per_m2"]),
+
+                        })
 
     return pd.DataFrame.from_records(records)
 
 # --- Step 3: Render scenario maps ---
+
 def render_maps(bldgs, config):
+    total_area = bldgs["area_m2"].sum()
+
     map_paths = []
+    # Compute baseline (no green roof) runoff
+    base_runoff_m3 = estimate_runoff(config, total_area, green_area=0.0)
+
 
     for frac in config["scenarios"]:
         sel = select_green_roofs(bldgs, frac)
