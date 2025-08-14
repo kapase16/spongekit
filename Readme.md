@@ -1,11 +1,11 @@
-# 🌱 SpongeKit
+# SpongeKit
 
 **SpongeKit** is an open-source, open-data-based green roof retrofit scenario generator.  
 It simulates the impact of various green infrastructure coverage levels on urban rooftops using just OpenStreetMap data — with no proprietary GIS tools required.
 
 ---
 
-## 🔍 What it does
+## What it does
 
 - Fetches buildings from OpenStreetMap for any city/tile
 - Applies user-defined green roof scenarios (e.g., 10%–100%)
@@ -16,7 +16,7 @@ It simulates the impact of various green infrastructure coverage levels on urban
 
 ---
 
-## 🚀 Try it locally
+## Try it locally
 
 ```bash
 git clone https://github.com/your-username/spongekit.git
