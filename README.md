@@ -27,7 +27,7 @@ It helps hydrologists, planners, and students explore how measures like **green 
 
 ---
 
-## 📦 Installation
+##  Installation
 
 1. Clone the repository and enter the folder:
    ```bash
@@ -48,7 +48,7 @@ It helps hydrologists, planners, and students explore how measures like **green 
 
 ---
 
-## 🚀 Usage
+##  Usage
 
 ### Run the Streamlit web app
 ```bash
@@ -86,7 +86,7 @@ This will generate:
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 spongekit/
@@ -102,7 +102,7 @@ spongekit/
 
 ---
 
-## 📖 Documentation
+##  Documentation
 - [`docs/methods.md`](docs/methods.md) → equations, assumptions, and hydrology details.  
 - [`docs/quickstart.md`](docs/quickstart.md) → step-by-step tutorial to run the tool.
 
