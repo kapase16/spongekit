@@ -5,7 +5,7 @@ It helps hydrologists, planners, and students explore how measures like **green 
 
 ---
 
-## 🌍 What it does
+##  What it does
 - Fetches **building footprints** from OpenStreetMap (or you can upload your own polygons).
 - Simulates **storm events** with simple hydrology:
   - Baseline roof runoff (impervious roofs, runoff coefficient `C_roof`).
