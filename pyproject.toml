@@ -1,0 +1,39 @@
+[build-system]
+# These packages are needed to build SpongeKit
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+# Basic project metadata
+name = "spongekit"
+version = "1.0.0"
+description = "Open-data SuDS scenario tool with Streamlit UI, CLI, and PDF reporting"
+authors = [
+    { name = "Yogesh Kapase", email = "yk16@utexas.edu" }
+]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.9"
+
+# Core dependencies needed to run SpongeKit
+dependencies = [
+    "streamlit>=1.34",   # Web app UI
+    "geopandas>=0.14",   # GIS vector data
+    "osmnx>=1.8",        # OSM fetching
+    "contextily>=1.5",   # Basemaps
+    "matplotlib>=3.8",   # Plotting
+    "pandas>=2.2",       # DataFrames
+    "numpy>=1.26",       # Math arrays
+    "shapely>=2.0",      # Geometry
+    "reportlab>=3.6",    # PDF generation
+    "click>=8.1",        # CLI
+    "pyproj>=3.6",       # CRS/projections
+]
+
+[project.scripts]
+# This will let you type `spongekit` in the terminal to run the CLI
+spongekit = "cli:main"
+
+[tool.setuptools]
+# Include your core package
+packages = ["spongekit_core"]

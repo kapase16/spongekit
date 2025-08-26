@@ -1,0 +1,16 @@
+# Core dependencies
+streamlit>=1.34       # Web app interface
+geopandas>=0.14       # Geospatial data handling
+osmnx>=1.8            # OpenStreetMap building footprints
+contextily>=1.5       # Basemap tiles for maps
+matplotlib>=3.8       # Plotting
+pandas>=2.2           # Data analysis
+numpy>=1.26           # Numerical operations
+shapely>=2.0          # Geometry operations
+reportlab>=3.6        # PDF generation
+click>=8.1            # CLI commands
+pyproj>=3.6           # Coordinate reference systems
+
+# Optional (only if installed locally)
+ #swmm-api>=0.5         # To export SWMM input files
+ #pyswmm>=1.3           # To run SWMM simulations

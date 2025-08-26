@@ -1,0 +1,31 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Build / distribution
+build/
+dist/
+*.egg-info/
+
+# Jupyter / Streamlit / logs
+.ipynb_checkpoints/
+.streamlit/
+*.log
+
+# OS-specific
+.DS_Store
+
+# Project outputs
+outputs/
+reports/
+cache/
+maps/
+swmm/
