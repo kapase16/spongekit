@@ -22,7 +22,6 @@ jobs:
           init-shell: bash
           cache-environment: true
           generate-run-shell: true
-          # Create env with geo stack from conda-forge (reliable prebuilt wheels)
           create-args: >
             python=3.11
             geopandas
@@ -39,11 +38,12 @@ jobs:
             pytest
             -c conda-forge
 
-      - name: Install pip-only deps (if any)
+      - name: Install project (editable) and pip-only deps
         shell: micromamba-shell {0}
         run: |
-          # If you have any packages that aren't on conda-forge, install via pip here.
-          # For SpongeKit v1.0, requirements.txt can still be installed (safe).
+          # Install your package so `from spongekit_core ...` works
+          pip install -e .
+          # If requirements.txt has extras/pins, install them too (ignore if already satisfied)
           pip install -r requirements.txt || true
 
       - name: Run tests
