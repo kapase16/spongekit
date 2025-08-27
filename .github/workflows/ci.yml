@@ -11,25 +11,42 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up micromamba (conda-forge)
+        uses: mamba-org/setup-micromamba@v2
         with:
-          python-version: "3.11"
+          micromamba-version: "latest"
+          environment-name: spongekit-ci
+          init-shell: bash
+          cache-environment: true
+          generate-run-shell: true
+          # Create env with geo stack from conda-forge (reliable prebuilt wheels)
+          create-args: >
+            python=3.11
+            geopandas
+            shapely
+            pyproj
+            osmnx
+            contextily
+            pandas
+            numpy
+            matplotlib
+            reportlab
+            click
+            pip
+            pytest
+            -c conda-forge
 
-      - name: Upgrade pip
+      - name: Install pip-only deps (if any)
+        shell: micromamba-shell {0}
         run: |
-          python -m pip install --upgrade pip
-
-      - name: Install dependencies
-        run: |
-          # Install main project requirements
-          pip install -r requirements.txt
-          # Ensure pytest is present
-          pip install pytest
+          # If you have any packages that aren't on conda-forge, install via pip here.
+          # For SpongeKit v1.0, requirements.txt can still be installed (safe).
+          pip install -r requirements.txt || true
 
       - name: Run tests
+        shell: micromamba-shell {0}
         run: |
           pytest -q
